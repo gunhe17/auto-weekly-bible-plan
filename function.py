@@ -12,7 +12,7 @@ def get_weekly_plan(
         *, 
         start_book, 
         start_chapter, 
-        daily_reading=3, 
+        daily_reading=2,
         bible_index="./data/bible_index.json", 
         bible_shortest_names="./data/bible_shortest_name.json"
     ):
@@ -87,13 +87,13 @@ def patch_part_data(
         for shape in slide.shapes:
             if shape.has_text_frame:
                 if "part_date" in shape.text:
-                    shape.text = shape.text.replace("part_date", date)
+                    shape.text = shape.text.replace("part_date", f"( {date} )")
 
                 for day_key, plan_index in day_mapping.items():
                     if day_key in shape.text:
                         shape.text = shape.text.replace(day_key, weekly_plan[plan_index])
 
-    pptx.save("./patched_pptx.pptx")
+    pptx.save(f"./shared/{date}.pptx")
 
     return
     

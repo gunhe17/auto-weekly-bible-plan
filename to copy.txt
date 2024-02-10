@@ -1,6 +1,6 @@
 export START_BOOK="역대상"
 export START_CHAPTER="10"
-export DATE="( 02월 11일 - 02월 17일 )"
+export DATE="02월 11일 - 02월 17일"
 export SELECTED_CUSTOM="animation_blue_church"
 
 python3.11 function.py
