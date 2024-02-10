@@ -1,5 +1,6 @@
 from pptx import Presentation
 from pptx.util import Pt
+import os
 import json
 
 initial_presentation = "./data/table_format.pptx"
@@ -99,8 +100,18 @@ def patch_part_data(
 
 
 ###############
-#   usecase
+#   main
 ###############
 
-weekly_plan = get_weekly_plan(start_book="창세기", start_chapter="1")
-patch_part_data(date="test_data", weekly_plan=weekly_plan, selected_custom="animation_fall")
+def main():
+
+    start_book = os.getenv('START_BOOK')
+    start_chapter = os.getenv('START_CHAPTER')
+    date = os.getenv('DATE')
+    selected_custom = os.getenv('SELECTED_CUSTOM')
+    
+    weekly_plan = get_weekly_plan(start_book=start_book, start_chapter=start_chapter)
+    patch_part_data(date=date, weekly_plan=weekly_plan, selected_custom=selected_custom)
+
+if __name__ == "__main__":
+    main()
