@@ -33,19 +33,8 @@
 
 ## 스크립트 실행
 
-스크립트를 실행하기 전에 필요한 환경 변수를 설정합니다. 이 예제에서는 `START_BOOK`, `START_CHAPTER`, `DATE`, `SELECTED_CUSTOM` 환경 변수를 사용합니다:
-
 ```bash
-export START_BOOK="창세기"
-export START_CHAPTER="1"
-export DATE="( mm월 dd일 - mm월 dd일 )"
-export SELECTED_CUSTOM="animation_fall"
-```
-
-환경 변수를 설정한 후, 다음 명령어로 스크립트를 실행합니다:
-
-```bash
-python3.11 function.py
+python script_name.py --start_book "Book Name" --start_chapter 1 --date "2022-02-20" --selected_custom "Custom Value"
 ```
 
 ## 주의 사항

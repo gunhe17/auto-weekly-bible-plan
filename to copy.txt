@@ -1,6 +1,0 @@
-export START_BOOK="역대상"
-export START_CHAPTER="24"
-export DATE="24.02.18"
-export SELECTED_CUSTOM="animation_blue_church"
-
-python3.11 function.py

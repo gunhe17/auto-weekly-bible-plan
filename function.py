@@ -1,11 +1,25 @@
 from datetime import datetime, timedelta
 from pptx import Presentation
 from pptx.util import Pt
+import argparse
 import os
 import json
 
 initial_presentation = "./data/table_format.pptx"
 
+def get_sundays_about_month(date_str):
+    date = datetime.strptime(date_str, "%y.%m")
+    first_day = date.replace(day=1)
+    days_until_first_sunday = (6 - first_day.weekday()) % 7
+    first_sunday = first_day + timedelta(days=days_until_first_sunday)
+    
+    sundays = []
+    current_sunday = first_sunday
+    while current_sunday.month == first_day.month:
+        sundays.append(current_sunday.strftime("%y.%m.%d"))
+        current_sunday += timedelta(days=7)
+    
+    return sundays
 
 def get_formatted_date(start_date_str):
     start_date = datetime.strptime(start_date_str, "%y.%m.%d")
@@ -63,7 +77,6 @@ def get_weekly_plan(
     
     return weekly_plan
 
-
 def patch_cell(cell, text):
     cell.text = ""
     text_frame = cell.text_frame
@@ -111,17 +124,26 @@ def patch_part_data(
 #   main
 ###############
 
-def main():
+def create_weekly_plan(args):
+    print(":: AUTO_WEEKLY_BIBLE_PLAN [ 25% ] - Calling functions...")
+    start_book = args.start_book
+    start_chapter = args.start_chapter
+    date = get_formatted_date(args.date)
+    selected_custom = args.selected_custom
+    print(":: AUTO_WEEKLY_BIBLE_PLAN [ 50% ] - Preparing parameters...")
 
-    start_book = os.getenv('START_BOOK')
-    start_chapter = os.getenv('START_CHAPTER')
-
-    date = get_formatted_date(os.getenv('DATE'))
-
-    selected_custom = os.getenv('SELECTED_CUSTOM')
-    
     weekly_plan = get_weekly_plan(start_book=start_book, start_chapter=start_chapter)
+    print(":: AUTO_WEEKLY_BIBLE_PLAN [ 75% ] - Processing datas...")
+
     patch_part_data(date=date, weekly_plan=weekly_plan, selected_custom=selected_custom)
+    print(":: AUTO_WEEKLY_BIBLE_PLAN [ 100% ] - Completed")
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Create a weekly plan based on given parameters.")
+    parser.add_argument("--start_book", required=True, help="The book to start with")
+    parser.add_argument("--start_chapter", type=int, required=True, help="The chapter to start with")
+    parser.add_argument("--date", required=True, help="The start date in YY.MM.DD format")
+    parser.add_argument("--selected_custom", required=True, help="A custom selection for the plan")
+
+    args = parser.parse_args()
+    create_weekly_plan(args)
