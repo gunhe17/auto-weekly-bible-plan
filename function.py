@@ -2,7 +2,6 @@ from datetime import datetime, timedelta
 from pptx import Presentation
 from pptx.util import Pt
 import argparse
-import os
 import json
 
 initial_presentation = "./data/table_format.pptx"

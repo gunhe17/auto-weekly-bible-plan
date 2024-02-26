@@ -8,33 +8,24 @@
 
 1. **about venv**
 
-   프로젝트의 의존성을 격리하기 위해 가상 환경을 사용합니다. 가상 환경을 생성하고 활성화하는 방법은 다음과 같습니다:
-
    ```bash
-   # 가상 환경 생성 (이미 생성된 경우 생략 가능)
    python3 -m venv .venv
-
-   # 가상 환경 활성화
    source .venv/bin/activate
    ```
 
 
 2. **requirements.txt**
 
-   프로젝트의 의존성을 설치하기 위해 다음 명령어를 실행합니다:
-
    ```bash
-   # pip 업그레이드
    pip install --upgrade pip
-
-   # requirements.txt에 명시된 의존성 설치
    pip install -r requirements.txt
    ```
 
 ## 스크립트 실행
+ After edit 'run.sh'
 
 ```bash
-python script_name.py --start_book "Book Name" --start_chapter 1 --date "2022-02-20" --selected_custom "Custom Value"
+scripts/run.sh
 ```
 
 ## 주의 사항
